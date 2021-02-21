@@ -31,8 +31,11 @@ class Search extends React.Component {
                _id: bookDetails.id,
                title: bookDetails.volumeInfo.title,
                authors:
-                    bookDetails.volumeInfo.authors?.authors ||
-                    "No Authors found",
+                    // bookDetails.volumeInfo.authors?.authors ||
+                    // "No Authors found",
+                    bookDetails.volumeInfo.authors
+                         ? bookDetails.volumeInfo.authors
+                         : "No Author Found",
                description: bookDetails.volumeInfo.description,
                image:
                     bookDetails.volumeInfo.imageLinks?.thumbnail ||

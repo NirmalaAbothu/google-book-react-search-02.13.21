@@ -5,6 +5,7 @@ import API from "../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
+
 import { Input, FormBtn } from "../components/Form";
 
 class Search extends React.Component {
@@ -12,16 +13,14 @@ class Search extends React.Component {
           value: "",
           bookArray: [],
      };
-     componentDidMount() {
-          this.SearchBook();
-     }
 
      SearchBook = (query) => {
           API.getBooks(query)
                .then((result) =>
                     this.setState({
-                         bookArray: result.data.items.map((bookDetails) =>
-                              this.createBook(bookDetails)
+                         bookArray: result.data.items.map(
+                              (bookDetails) => this.createBook(bookDetails),
+                              console.log("Book details:", result.data.items)
                          ),
                     })
                )
@@ -31,18 +30,16 @@ class Search extends React.Component {
           return {
                _id: bookDetails.id,
                title: bookDetails.volumeInfo.title,
-               authors: bookDetails.volumeInfo.authors,
+               authors:
+                    bookDetails.volumeInfo.authors?.authors ||
+                    "No Authors found",
                description: bookDetails.volumeInfo.description,
-               image: bookDetails.volumeInfo.imageLinks.thumbnail,
+               image:
+                    bookDetails.volumeInfo.imageLinks?.thumbnail ||
+                    "No  Image found",
                link: bookDetails.volumeInfo.previewLink,
           };
      };
-
-     //      deleteBook = (id) => {
-     //         API.deleteBook(id)
-     //              .then((res) => loadBooks())
-     //              .catch((err) => console.log(err));
-     //    }
 
      // Handles updating component state when the user types into the input field
      handleInputChange = (event) => {
@@ -51,8 +48,8 @@ class Search extends React.Component {
           this.setState({ [name]: value });
      };
 
-     // When the form is submitted, use the API.saveBook method to save the book data
-     // Then reload books from the database
+     // When the form is submitted, use the API.getBooks method to retive  the books
+     // and display
      handleFormSubmit = (event) => {
           event.preventDefault();
           this.SearchBook(this.state.search);
@@ -69,8 +66,7 @@ class Search extends React.Component {
                                         Search for and Save Books of Interest
                                    </h5>
                               </Jumbotron>
-                              {/* <Jumbotron> */}
-                              {/* <div style={{ width: "800px", borderStyle: "groove" }}> */}
+
                               <h5 style={{ textAlign: "center" }}>
                                    Book Search
                               </h5>
@@ -78,36 +74,35 @@ class Search extends React.Component {
                                    <h6 style={{ textAlign: "left" }}>Book</h6>
                                    <Input
                                         onChange={this.handleInputChange}
-                                        value="search"
+                                        value={this.state.search}
                                         placeholder="Search a book"
                                         id="search"
+                                        name="search"
                                    />
-                                   {/* <Input
-                                          onChange={handleInputChange}
-                                          name="author"
-                                          placeholder="Author (required)"
-                                     /> */}
-                                   {/* <TextArea
-                                          onChange={handleInputChange}
-                                          name="synopsis"
-                                          placeholder="Synopsis (Optional)"
-                                     /> */}
-                                   <FormBtn
-                                        // disabled={
-                                        //      !(
-                                        //           formObject.author &&
-                                        //           formObject.title
-                                        //      )
-                                        // }
-                                        onClick={this.handleFormSubmit}
-                                   >
+
+                                   <FormBtn onClick={this.handleFormSubmit}>
                                         Search
                                    </FormBtn>
                               </form>
-                              {/* </div> */}
-                              {/* </Jumbotron> */}
-                              <detils books={this.state.bookArray} />
                          </Col>
+                    </Row>
+                    <Row>
+                         <Col size="xs-12 md-3"></Col>
+                         <Col size="md-6" style={{ marginLeft: "50PX" }}>
+                              <List>
+                                   {[...this.state.bookArray].map((book) => (
+                                        <ListItem
+                                             key={book.id}
+                                             title={book.title}
+                                             authors={book.authors}
+                                             link={book.link}
+                                             description={book.description}
+                                             image={book.image}
+                                        />
+                                   ))}
+                              </List>
+                         </Col>
+                         <Col size="md-3"></Col>
                     </Row>
                </Container>
           );

@@ -5,7 +5,10 @@ import { Link, useLocation } from "react-router-dom";
 function Nav() {
      const location = useLocation();
      return (
-          <ul className="nav nav-tabs">
+          <ul
+               className="nav nav-tabs"
+               style={{ backgroundColor: "lightblue", marginBottom: "50px" }}
+          >
                <li className="nav-item">
                     <Link
                          to="/"

@@ -60,4 +60,4 @@ following commands
 
 Copyright © 2020 Nirmala Abothu
 
-[Deployed Github Link](https://nirmalaabothu.github.io/user-directory-01.30.2021/)
+[Deployed Github Link](https://booksearc.herokuapp.com/)

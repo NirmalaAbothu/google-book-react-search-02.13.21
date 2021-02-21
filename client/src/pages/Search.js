@@ -53,6 +53,9 @@ class Search extends React.Component {
      handleFormSubmit = (event) => {
           event.preventDefault();
           this.SearchBook(this.state.search);
+          this.setState({
+               search: "",
+          });
      };
 
      render() {

@@ -51,7 +51,7 @@ export function ListItem(props) {
                <Container>
                     <Row>
                          <Col size="xs-4 sm-2 md-3">
-                              <img src={props.image} />
+                              <img src={props.image} alt=" No Image Found" />
                          </Col>
                          <Col size="xs-8 sm-10 md-9">
                               <h3>{props.title}</h3>
@@ -92,7 +92,6 @@ export function ListItem(props) {
                                         className="input-lg"
                                         onClick={handleDeleteBtn}
                                         style={{
-                                             // backgroundColor: "green",
                                              marginLeft: "10px",
                                              borderColor: "red",
                                         }}

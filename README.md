@@ -12,7 +12,6 @@
 
 ![alt text](client/src/Assets/Images/image4.PNG)
 ![alt text](client/src/Assets/Images/image5.PNG)
-![alt text](client/src/Assets/Images/image6.PNG)
 
 -    User can search for books via the Google Books API and render them. User has the option to "View" a book, bringing them to the book on Google Books, or "Save" a book, saving it to the Mongo database.
 

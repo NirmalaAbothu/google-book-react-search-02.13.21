@@ -7,6 +7,8 @@ import Search from "./pages/Search";
 import Saved from "./pages/Saved";
 import Nav from "./components/Nav";
 
+//App component
+
 function App() {
      return (
           <Router>

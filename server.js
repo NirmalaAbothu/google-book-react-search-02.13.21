@@ -13,24 +13,24 @@ app.use(express.json());
 app.use(routes);
 
 if (process.env.NODE_ENV === "production") {
-     // app.use(express.static("client/build"));
-     app.use(express.static(path.join(__dirname, "./client/build")));
+     app.use(express.static("client/build"));
+     // app.use(express.static(path.join(__dirname, "./client/build")));
 }
 
 // Connect to the Mongo DB
-// mongoose.connect(
-//      process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist"
-// );
-
 mongoose.connect(
-     process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist",
-     {
-          useNewUrlParser: true,
-          useUnifiedTopology: true,
-          useCreateIndex: true,
-          useFindAndModify: false,
-     }
+     process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist"
 );
+
+// mongoose.connect(
+//      process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist",
+//      {
+//           useNewUrlParser: true,
+//           useUnifiedTopology: true,
+//           useCreateIndex: true,
+//           useFindAndModify: false,
+//      }
+// );
 
 // Start the API server
 app.listen(PORT, function () {
